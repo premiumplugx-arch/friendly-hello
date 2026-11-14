@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiProxyRouteImport } from './routes/api/proxy'
+import { Route as ApiPublicProxyRouteImport } from './routes/api/public/proxy'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiProxyRoute = ApiProxyRouteImport.update({
+  id: '/api/proxy',
+  path: '/api/proxy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicProxyRoute = ApiPublicProxyRouteImport.update({
+  id: '/api/public/proxy',
+  path: '/api/public/proxy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/proxy': typeof ApiProxyRoute
+  '/api/public/proxy': typeof ApiPublicProxyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/proxy': typeof ApiProxyRoute
+  '/api/public/proxy': typeof ApiPublicProxyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/proxy': typeof ApiProxyRoute
+  '/api/public/proxy': typeof ApiPublicProxyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/proxy' | '/api/public/proxy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/proxy' | '/api/public/proxy'
+  id: '__root__' | '/' | '/api/proxy' | '/api/public/proxy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiProxyRoute: typeof ApiProxyRoute
+  ApiPublicProxyRoute: typeof ApiPublicProxyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/proxy': {
+      id: '/api/proxy'
+      path: '/api/proxy'
+      fullPath: '/api/proxy'
+      preLoaderRoute: typeof ApiProxyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/proxy': {
+      id: '/api/public/proxy'
+      path: '/api/public/proxy'
+      fullPath: '/api/public/proxy'
+      preLoaderRoute: typeof ApiPublicProxyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiProxyRoute: ApiProxyRoute,
+  ApiPublicProxyRoute: ApiPublicProxyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

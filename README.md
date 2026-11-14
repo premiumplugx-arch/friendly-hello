@@ -1,12 +1,14 @@
-# Friendly Hello
+# Power Proxy Plus
 
-hi
+make it ultra powerfull proxy
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://power-proxy-pal.lovable.app
+
 ## Build with Lovable
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/bb1a231b-1062-4d4a-a592-c5aecb0db0d3).
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/009245bb-38a0-42c9-924d-69d1f5d95c4f).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
 - **Stay in sync**: every change made in Lovable is committed straight to this repository.
